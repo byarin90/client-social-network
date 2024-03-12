@@ -6,10 +6,11 @@ import Box from '@mui/material/Box';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { loginValidation } from '../../shared/validations/validations';
-import { Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { LoginFormInputs } from '../../shared/types';
 import useRememberMe from '../../shared/hooks/useRememberMe';
+import Link from '../../shared/components/Link';
+
 
 
 
@@ -94,10 +95,10 @@ const Form = () => {
                         width: '100%',
                     }}
                 >
-                    <Link href="#" variant="body2">
+                    <Link to="/sign-up" variant="body2">
                         {t("Forgot password?")}
                     </Link>
-                    <Link href="#" variant="body2">
+                    <Link to={'/sign-up'}>
                         {t("Don't have an account? Sign Up")}
                     </Link>
                 </Box>

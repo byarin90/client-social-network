@@ -1,10 +1,10 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import translationEN from '../../translations/en/translations.json';
-import translationHE from '../../translations/he/translations.json';
+import translationEN from '../translations/en/translations.json';
+import translationHE from '../translations/he/translations.json';
 import { makeStyles } from 'tss-react/mui';
-import { useLanguage } from '../../context/LanguageContext';
-import ButtonGroup from '../../utils/ButtonGroup';
+import { useLanguage } from '../context/LanguageContext';
+import ButtonGroup from './ButtonGroup';
 
 i18next.use(initReactI18next).init({
     resources: {
