@@ -8,6 +8,7 @@ import Form from './views/Form';
 import ProfilePictureUpload from './views/ImageProfile';
 import WriteBioPage from './views/WriteBioPage';
 import ReviewAndCreateAccount from './views/ReviewAndCreateAccount';
+import CreateAccount from './views/CreateAccount';
 
 const SignUpLayout = () => {
   const { step, setStep } = useStepper()
@@ -24,6 +25,8 @@ const SignUpLayout = () => {
         return <WriteBioPage/>
       case 5:
          return <ReviewAndCreateAccount/>
+      case 6:
+        return <CreateAccount/>
       default:
         return <Box>
           <Typography>Step-1</Typography>

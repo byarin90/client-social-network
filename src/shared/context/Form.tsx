@@ -5,6 +5,7 @@ export function createFormContext<T>() {
   type ContextValue = {
     formData: T;
     onChangeFormData: (key: keyof T, value: any) => void;
+    clearFormData: () => void;
   };
 
   const FormContext = createContext<ContextValue | null>(null);
@@ -32,7 +33,11 @@ export function createFormContext<T>() {
       }));
     };
 
-    const value = { formData, onChangeFormData };
+    const clearFormData = () => {
+      setFormData(initialFormData); // Resets the form data to the initial state
+    };
+
+    const value = { formData, onChangeFormData, clearFormData };
 
     return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
   };

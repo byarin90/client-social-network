@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import React from 'react'
 import { CircularProgress, SxProps, Typography } from '@mui/material'
 
 export interface LoaderProps {
@@ -28,7 +27,6 @@ export default function Loader({
   size = 40,
   loaderStyle = {},
   labelStyle = {},
-  ...props
 }: LoaderProps): JSX.Element {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

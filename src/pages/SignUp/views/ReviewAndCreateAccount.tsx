@@ -12,7 +12,7 @@ const ReviewAndCreateAccount = () => {
     console.log('formData', formData);
 
     return (
-        <Container component="main" maxWidth="sm" sx={{ mt: 2 }}>
+        <Container component="main" maxWidth="sm" >
             <Box
                 sx={{
                     display: 'flex',
@@ -21,7 +21,7 @@ const ReviewAndCreateAccount = () => {
                     gap: 2,
                 }}
             >
-                <Typography variant="h4" component="h1" gutterBottom>
+                <Typography fontSize={'1.6rem'} fontWeight={'bold'} mt={3} component="h1" gutterBottom>
                     Review Your Information
                 </Typography>
                 <Typography variant="h6" sx={{ textAlign: 'center' }}>

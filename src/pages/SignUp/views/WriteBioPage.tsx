@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Box, Button, TextField, Typography, Container } from '@mui/material';
 import { useStepper } from '../../../shared/context/StepperContext';
 
@@ -16,7 +16,7 @@ const WriteBioPage = () => {
     };
 
     return (
-        <Container component="main" maxWidth="sm" sx={{ mt: 8 }}>
+        <Container component="main" maxWidth="sm" >
             <Box
                 sx={{
                     display: 'flex',
@@ -25,11 +25,14 @@ const WriteBioPage = () => {
                     gap: 2,
                 }}
             >
-                <Typography variant="h4" component="h1" gutterBottom>
+                <Typography textAlign={'center'} variant="h4" component="h1" mt={5}>
                     Share a Bit About Yourself
                 </Typography>
-                <Typography variant="h6" sx={{ mt: 2, mb: 4, textAlign: 'center' }}>
-                    Your bio helps others understand who you are and what interests you. Feel free to share any hobbies, experiences, or fun facts!
+                <Typography variant="h6" sx={{ mt: 2, textAlign: 'center' }}>
+                    Your bio helps others understand who you are and what interests you. 
+                </Typography>
+                <Typography mb={4} textAlign={'center'}>
+                Feel free to share any hobbies, experiences, or fun facts!
                 </Typography>
                 <TextField
                     label="Your Bio"

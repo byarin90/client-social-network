@@ -7,7 +7,6 @@ import { useStepper } from '../../../shared/context/StepperContext';
 import { getCroppedImg } from '../../../shared/libs/getCroppedImg';
 import { useSignUpForm } from '../../../shared/context';
 
-// Styled component for the dropzone
 const StyledDropzone = styled('div')(({ theme }) => ({
     border: '2px dashed #eeeeee',
     padding: '20px',
@@ -24,19 +23,16 @@ const ProfilePictureUpload: React.FC = () => {
     const { formData, onChangeFormData } = useSignUpForm();
     const { increment } = useStepper();
 
-    // Initial state from context
     const [imageSrc, setImageSrc] = useState<string | null>(formData.profilePicState.imageSrc);
     const [crop, setCrop] = useState(formData.profilePicState.crop);
     const [zoom, setZoom] = useState(formData.profilePicState.zoom);
     const [croppedArea, setCroppedArea] = useState<Area | null>(formData.profilePicState.croppedArea);
 
-    // Drop handler
     const onDrop = useCallback((acceptedFiles: File[]) => {
         const file = acceptedFiles[0];
         const reader = new FileReader();
         reader.onloadend = () => {
             setImageSrc(reader.result as string);
-            // Update context on new image drop
             onChangeFormData('profilePicState', {
                 ...formData.profilePicState,
                 imageSrc: reader.result as string,
@@ -45,7 +41,6 @@ const ProfilePictureUpload: React.FC = () => {
         reader.readAsDataURL(file);
     }, [onChangeFormData, formData.profilePicState]);
 
-    // Cropper setup
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: 'image/*' as any,
@@ -54,7 +49,6 @@ const ProfilePictureUpload: React.FC = () => {
         noKeyboard: !!imageSrc,
     });
 
-    // Clear image and reset state
     const clearImage = () => {
         setImageSrc(null);
         setCrop({ x: 0, y: 0 });
@@ -70,12 +64,10 @@ const ProfilePictureUpload: React.FC = () => {
         });
     };
 
-    // Handle crop completion
-    const onCropComplete = useCallback((croppedAreaPercentage: Area, croppedAreaPixels: Area) => {
+    const onCropComplete = useCallback((_croppedAreaPercentage: Area, croppedAreaPixels: Area) => {
         setCroppedArea(croppedAreaPixels);
     }, []);
 
-    // Handle image cropping and update context
     const handleCropImage = async () => {
         if (!imageSrc || !croppedArea) return;
         try {
@@ -83,9 +75,9 @@ const ProfilePictureUpload: React.FC = () => {
             const fileUrl = URL.createObjectURL(croppedImageBlob);
             onChangeFormData('profilePicState', {
                 ...formData.profilePicState,
-                profilePicture: fileUrl, // Save cropped image URL
+                profilePicture: fileUrl, 
             });
-            increment(); // Proceed to next step
+            increment(); 
         } catch (e) {
             console.error(e);
         }
@@ -135,6 +127,7 @@ const ProfilePictureUpload: React.FC = () => {
                             top: 8,
                             right: 8,
                             color: 'primary.main',
+                            zIndex: 5,
                         }}
                     >
                         <CancelIcon />

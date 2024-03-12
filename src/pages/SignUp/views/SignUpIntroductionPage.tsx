@@ -1,9 +1,16 @@
 import { Button, Container, Typography, Box } from '@mui/material';
 import Link from '../../../shared/components/Link';
 import { useStepper } from '../../../shared/context/StepperContext';
+import { useSignUpForm } from '../../../shared/context';
+import { useEffect } from 'react';
 
 const SignUpIntroductionPage = () => {
- const {increment} = useStepper();
+  const { clearFormData } = useSignUpForm();
+  const { increment } = useStepper();
+
+  useEffect(() => {
+    clearFormData()
+  }, [])
 
   return (
     <Container component="main" maxWidth="sm" sx={{ mt: 8 }}>
