@@ -3,11 +3,11 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import SelectLanguage from '../../shared/components/translation/SelectLanguage';
+import SelectLanguage from '../../shared/components/SelectLanguage';
 import Form from './Form';
 import { useTranslation } from 'react-i18next';
 import Image from '../../assets/Login.png'
-const Login = () => {
+const SignIn = () => {
   const { t } = useTranslation();
   return (
     <Box sx={{
@@ -17,10 +17,9 @@ const Login = () => {
       <Box
         sx={{
           flex: 1,
-          display: { xs: 'none', sm: 'block' }, // Hide on xs, show on sm and above
+          display: { xs: 'none', sm: 'block' },
           backgroundImage: `url(${Image})`,
           backgroundRepeat: 'no-repeat',
-          backgroundColor: (t) => t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -30,7 +29,7 @@ const Login = () => {
         elevation={6}
         square
         sx={{
-          flex: { xs: 1, sm: 2, md: 0.8 }, // Take full width on xs, 2/3 on sm and above
+          flex: { xs: 1, sm: 2, md: 0.8 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -80,4 +79,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;
