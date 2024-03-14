@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { LoginFormInputs } from '../../shared/types';
 import useRememberMe from '../../shared/hooks/useRememberMe';
 import Link from '../../shared/components/Link';
+import { useMediaQuery } from '@mui/material';
 
 
 
@@ -18,6 +19,7 @@ import Link from '../../shared/components/Link';
 const Form = () => {
     const { t } = useTranslation();
     const { rememberMe, toggleRememberMe, getCredentialsFromLocalStorage, saveCredentialsInLocalStorage } = useRememberMe()
+    const isMobile = useMediaQuery('(max-width: 600px)')
 
 
 
@@ -50,6 +52,7 @@ const Form = () => {
                     margin="normal"
                     fullWidth
                     id="email"
+                    size={isMobile ? 'small' : 'medium'}
                     label={t("Email Address")}
                     name="email"
                     autoComplete="email"
@@ -61,6 +64,7 @@ const Form = () => {
                     {...register('password')}
                     margin="normal"
                     fullWidth
+                    size={isMobile ? 'small' : 'medium'}
                     name="password"
                     label={t("Password")}
                     type="password"

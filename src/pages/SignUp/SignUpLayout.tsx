@@ -4,21 +4,23 @@ import DialogWrapperSignUp from './DialogWrapperSignUp';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useStepper } from '../../shared/context/StepperContext';
 import SignUpIntroductionPage from './views/SignUpIntroductionPage';
-import Form from './views/Form';
 import ProfilePictureUpload from './views/ImageProfile';
 import WriteBioPage from './views/WriteBioPage';
 import ReviewAndCreateAccount from './views/ReviewAndCreateAccount';
 import CreateAccount from './views/CreateAccount';
+import SignUpForm from './views/Form';
+import { useTranslation } from 'react-i18next';
 
 const SignUpLayout = () => {
   const { step, setStep } = useStepper()
-
+  const {t} = useTranslation();
+  
   const getCurrentStep = () => {
     switch (step) {
       case 1:
         return <SignUpIntroductionPage />
       case 2:
-        return <Form/>
+        return <SignUpForm/>
       case 3:
         return <ProfilePictureUpload/>
       case 4:
@@ -47,7 +49,7 @@ const SignUpLayout = () => {
       Header={
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -57,7 +59,7 @@ const SignUpLayout = () => {
             <LockOutlinedIcon sx={{ color: 'white' }} />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {("Sign Up")}
+            {t("Sign Up")}
           </Typography>
         </Box>
       }

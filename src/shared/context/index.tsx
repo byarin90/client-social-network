@@ -7,6 +7,8 @@ const initialSignUpFormData: FormDataSignUp = {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
+    isAggree: false,
     profilePicState: {
         profilePicture: '',
         imageSrc: null,
@@ -14,7 +16,8 @@ const initialSignUpFormData: FormDataSignUp = {
         zoom: 1.5,
         croppedArea: null,
     },
-    bio: ''
+    bio: '',
+
 };
 
 export const { FormProvider: SignUpFormProvider, useForm: useSignUpForm } = createFormContext<FormDataSignUp>()

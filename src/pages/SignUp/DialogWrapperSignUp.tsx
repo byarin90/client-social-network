@@ -2,6 +2,7 @@ import { Box, Button, Container, Paper } from "@mui/material"
 import Image from "../../assets/Login.png"
 import { useStepper } from "../../shared/context/StepperContext"
 import { makeStyles } from "tss-react/mui"
+import { useTranslation } from "react-i18next"
 const DialogWrapperSignUp = (
     {
         children,
@@ -31,11 +32,12 @@ const DialogWrapperSignUp = (
 
     }))
     const { classes } = useStyles()
+    const {t} = useTranslation();
     return (
         <Box  
         className={classes.root}
         sx={{
-            display: 'flex', flexDirection: 'row-reverse', height: '100vh', direction: 'ltr',
+            display: 'flex', flexDirection: 'row-reverse', minHeight: '100vh', direction: 'ltr',
         }}
         >
             <Box
@@ -77,7 +79,7 @@ const DialogWrapperSignUp = (
                 <Box p={1} width={'100%'} sx={{ ...toolBarSx, alignSelf: 'flex-start' }}>
                     {ToolBar}
                     {preventBackAtSteps && preventBackAtSteps.includes(step) ? null : (
-                        <Button onClick={goBack}>Go Back</Button>
+                        <Button onClick={goBack}>{t('Go Back')}</Button>
                     )
                     }
                 </Box>

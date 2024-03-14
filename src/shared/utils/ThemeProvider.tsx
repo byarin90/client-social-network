@@ -6,6 +6,7 @@ import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl'
 import { prefixer } from 'stylis'
 import { useLanguage } from '../context/LanguageContext';
+import { Toaster } from 'react-hot-toast';
 
 const ThemeProvider = (
     {
@@ -51,6 +52,9 @@ const ThemeProvider = (
             <MuiThemeProvider theme={theme}>
                 <CssBaseline />
                 {children}
+                <Toaster 
+                position={language === 'he' ? 'top-right' : 'top-left'}
+                />
             </MuiThemeProvider>
         </CacheProvider>
     )
