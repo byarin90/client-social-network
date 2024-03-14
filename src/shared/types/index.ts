@@ -6,24 +6,35 @@ type LoginFormInputs = {
 };
 
 interface ProfilePictureState {
-    profilePicture: string; // URL or base64 string of the cropped image
-    imageSrc: string | null; // Source of the image to be cropped
-    crop: { x: number; y: number }; // Crop position
-    zoom: number; // Zoom level
-    croppedArea: Area | null; // Cropped area details
+    profilePicture: string; 
+    imageSrc: string | null; 
+    crop: { x: number; y: number };
+    zoom: number;
+    croppedArea: Area | null; 
   }
+  interface SignUpFormInputs {
+    firstName: string;
+    lastName: string;
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
 
 interface FormDataSignUp {
-    firstName: string,
-    lastName: string,
-    username: string,
-    email: string,
-    password: string,
+    firstName: string | null,
+    lastName: string | null,
+    username: string | null,
+    email: string | null,
+    password: string | null,
+    confirmPassword: string | null,
+    isAggree: boolean,
     profilePicState: ProfilePictureState,
-    bio: string
+    bio: string | null,
 }
 
 export type {
     LoginFormInputs,
     FormDataSignUp,
+    SignUpFormInputs,
 }

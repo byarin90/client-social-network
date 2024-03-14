@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react';
-import { Typography, Box, styled, IconButton, Button } from '@mui/material';
+import { Typography, Box, styled, IconButton, Button, useMediaQuery } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useDropzone } from 'react-dropzone';
 import Cropper, { Area } from 'react-easy-crop';
 import { useStepper } from '../../../shared/context/StepperContext';
 import { getCroppedImg } from '../../../shared/libs/getCroppedImg';
 import { useSignUpForm } from '../../../shared/context';
+import { useTranslation } from 'react-i18next';
 
 const StyledDropzone = styled('div')(({ theme }) => ({
     border: '2px dashed #eeeeee',
@@ -17,12 +18,13 @@ const StyledDropzone = styled('div')(({ theme }) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 10
 }));
 
 const ProfilePictureUpload: React.FC = () => {
     const { formData, onChangeFormData } = useSignUpForm();
     const { increment } = useStepper();
-
+    const isMobile = useMediaQuery('(max-width: 600px)')
     const [imageSrc, setImageSrc] = useState<string | null>(formData.profilePicState.imageSrc);
     const [crop, setCrop] = useState(formData.profilePicState.crop);
     const [zoom, setZoom] = useState(formData.profilePicState.zoom);
@@ -45,7 +47,7 @@ const ProfilePictureUpload: React.FC = () => {
         onDrop,
         accept: 'image/*' as any,
         maxFiles: 1,
-        noClick: !!imageSrc, 
+        noClick: !!imageSrc,
         noKeyboard: !!imageSrc,
     });
 
@@ -75,26 +77,31 @@ const ProfilePictureUpload: React.FC = () => {
             const fileUrl = URL.createObjectURL(croppedImageBlob);
             onChangeFormData('profilePicState', {
                 ...formData.profilePicState,
-                profilePicture: fileUrl, 
+                profilePicture: fileUrl,
+                crop,
+                croppedArea,
+                zoom,
             });
-            increment(); 
+            increment();
         } catch (e) {
             console.error(e);
         }
     };
 
+    const { t } = useTranslation();
+
     return (
         <Box sx={{ mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant="h5">Upload Your Profile Picture</Typography>
+            <Typography variant="h5">{t('Upload Your Profile Picture')}</Typography>
             {!imageSrc && (
                 <StyledDropzone {...getRootProps()}>
                     <input {...getInputProps()} />
-                    <Typography>Drag 'n' drop your picture here, or click to select a file</Typography>
-                    {isDragActive && <Typography sx={{ mt: 2 }}>Drop the files here ...</Typography>}
+                    <Typography>{t('Drag & drop your picture here, or click to select a file')}</Typography>
+                    {isDragActive && <Typography sx={{ mt: 2 }}>{t('Drop the files here ...')}</Typography>}
                 </StyledDropzone>
             )}
             {imageSrc && (
-                <Box sx={{ position: 'relative', width: '100%', maxWidth: 400, height: 400, mt: 2 }}>
+                <Box sx={{ position: 'relative', width: '100%', maxWidth: isMobile ? 300 : 400, height: isMobile ? 300 : 400, mt: 2 }}>
                     <Cropper
                         image={imageSrc}
                         crop={crop}
@@ -136,11 +143,11 @@ const ProfilePictureUpload: React.FC = () => {
             )}
             <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
                 <Button variant="contained" onClick={handleCropImage} sx={{ mb: 2 }}>
-                    Continue
+                    {t('Continue')}
                 </Button>
- 
+
                 <Button variant="text" onClick={increment}>
-                    Skip
+                    {t('Skip')}
                 </Button>
             </Box>
         </Box>

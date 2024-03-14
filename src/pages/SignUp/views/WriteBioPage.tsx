@@ -1,48 +1,52 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Box, Button, TextField, Typography, Container } from '@mui/material';
 import { useStepper } from '../../../shared/context/StepperContext';
+import { useSignUpForm } from '../../../shared/context';
+import { useTranslation } from 'react-i18next';
 
 const WriteBioPage = () => {
     const { increment } = useStepper();
-    const [bio, setBio] = useState('');
+    const { onChangeFormData, formData: { bio: bioContext } } = useSignUpForm();
+    const [bio, setBio] = useState(bioContext || '');
 
-    const handleBioChange = (event:any) => {
+    const handleBioChange = (event: any) => {
         setBio(event.target.value);
     };
 
     const handleSubmit = () => {
-        console.log(bio); 
-        increment(); 
+        onChangeFormData('bio', bio);
+        increment();
     };
 
+    const { t } = useTranslation();
     return (
-        <Container component="main" maxWidth="sm" >
+        <Container component="main" maxWidth="sm"  >
             <Box
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 1,
                 }}
             >
                 <Typography textAlign={'center'} variant="h4" component="h1" mt={5}>
-                    Share a Bit About Yourself
+                    {t('Share a Bit About Yourself')}
                 </Typography>
                 <Typography variant="h6" sx={{ mt: 2, textAlign: 'center' }}>
-                    Your bio helps others understand who you are and what interests you. 
+                    {t('Your bio helps others understand who you are and what interests you.')}
                 </Typography>
                 <Typography mb={4} textAlign={'center'}>
-                Feel free to share any hobbies, experiences, or fun facts!
+                    {t('Feel free to share any hobbies, experiences, or fun facts!')}
                 </Typography>
                 <TextField
-                    label="Your Bio"
+                    label={t("Your Bio")}
                     multiline
                     rows={4}
                     fullWidth
                     variant="outlined"
                     value={bio}
                     onChange={handleBioChange}
-                    placeholder="I love hiking, reading, and meeting new people..."
+                    placeholder={t("I love hiking, reading, and meeting new people...")}
                 />
                 <Button
                     onClick={handleSubmit}
@@ -50,12 +54,12 @@ const WriteBioPage = () => {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
-                    Save and Continue
+                    {t('Save and Continue')}
                 </Button>
 
                 <Button variant="text" onClick={increment}>
-                Skip
-            </Button>
+                    {t('Skip')}
+                </Button>
             </Box>
         </Container>
     );

@@ -2,14 +2,16 @@ import { Box, Typography, Button, Container, Avatar } from '@mui/material';
 import { useSignUpForm } from '../../../shared/context';
 import { useStepper } from '../../../shared/context/StepperContext';
 import UnknownImage from '../../../assets/avatar.jpg';
+import { useTranslation } from 'react-i18next';
 
 const ReviewAndCreateAccount = () => {
     const { formData } = useSignUpForm();
     const { increment } = useStepper();
-    const profilePic = formData?.profilePicState?.profilePicture;
 
-    const bio = 'This is a preview of your bio. It will be visible to other users on your profile.';
-    console.log('formData', formData);
+    const profilePic = formData?.profilePicState?.profilePicture;
+    const { t } = useTranslation();
+
+    const bio = formData?.bio || '';
 
     return (
         <Container component="main" maxWidth="sm" >
@@ -22,10 +24,10 @@ const ReviewAndCreateAccount = () => {
                 }}
             >
                 <Typography fontSize={'1.6rem'} fontWeight={'bold'} mt={3} component="h1" gutterBottom>
-                    Review Your Information
+                    {t('Review Your Information')}
                 </Typography>
                 <Typography variant="h6" sx={{ textAlign: 'center' }}>
-                    Make sure everything looks good before you create your account!
+                    {t('Make sure everything looks good before you create your account!')}
                 </Typography>
                 <Box
                     sx={{
@@ -36,14 +38,13 @@ const ReviewAndCreateAccount = () => {
                         gap: 2,
                     }}
                 >
-                    <Typography variant="subtitle1">Your Profile Picture</Typography>
+                    {profilePic && (<Typography variant="subtitle1">{t('Your Profile Picture')}</Typography>)}
                     <Avatar
-
                         alt="Profile Picture"
                         src={profilePic || UnknownImage}
                         sx={{ width: 150, height: 150, border: '12px solid #eeeeee' }}
                     />
-                    <Typography variant="subtitle1">Your Bio</Typography>
+                    {bio && (<Typography variant="subtitle1">{t('Your Bio')}</Typography>)}
                     <Typography sx={{ textAlign: 'center' }}>{bio}</Typography>
                 </Box>
                 <Button
@@ -52,7 +53,7 @@ const ReviewAndCreateAccount = () => {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
-                    Create Account
+                    {t('Create Account')}
                 </Button>
             </Box>
         </Container>
